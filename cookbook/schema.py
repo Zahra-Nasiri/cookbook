@@ -1,6 +1,6 @@
 import graphene
 from graphene_django import DjangoObjectType
-from ingredients import Category, Ingredient
+from ingredients.models import Category, Ingredient
 
 class CategoryType(DjangoObjectType):
     class Meta:
@@ -13,7 +13,7 @@ class IngredientType(DjangoObjectType):
         fields = ("id", "name", "notes", "category")
 
 class Query(graphene.ObjectType):
-    all_ingredienst = graphene.List(IngredientType)
+    all_ingredients = graphene.List(IngredientType)
     category_by_name = graphene.Field(CategoryType, name=graphene.String(required=True))
 
     def resolve_all_ingredients(root, info):
